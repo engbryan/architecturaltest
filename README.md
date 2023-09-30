@@ -1,232 +1,164 @@
+# Proposal for Cash Flow Management Service
 
-# Proposta para Serviço de Gestão de Fluxo de Caixa
+## Introduction
 
+With the aim of helping a merchant manage their daily cash flow and track their debit and credit transactions, we propose a Cash Flow Management Service. This service will allow the merchant to input their transactions and generate a consolidated daily balance report.
 
-## Introdução
+## Solution Description
 
-Com o objetivo de ajudar um comerciante a gerenciar seu fluxo de caixa diário e acompanhar suas transações de débito e crédito, propomos um Serviço de Gestão de Fluxo de Caixa. Este serviço permitirá que o comerciante insira suas transações e gere um relatório diário consolidado de saldo.
+Our Cash Flow Management Service will provide the following functionalities:
 
+- Transaction Management: The service will enable the merchant to input their daily transactions, including debits and credits.
+- Consolidated Daily Report: The service will generate a consolidated daily balance report, displaying the daily transactions and the merchant's balance.
 
-## Descrição da Solução
+## Requirements
 
-Nosso Serviço de Gestão de Fluxo de Caixa fornecerá as seguintes funcionalidades:
+1. Frontend web development team in React technologies.
+2. Backend web development team in C# technology.
+3. Desktop development team in C# technology.
 
+## Technical Requirements
 
+- 1 Azure subscription for Active Directory (AD).
+- 1 AWS subscription for hosting the web solution.
+- 1 DevOps organization for versioning source code and managing deployments in the solution's environments.
+- 2 computers for development and testing of the POS application.
 
-* Gestão de Transações: O serviço permitirá que o comerciante insira suas transações diárias, incluindo débitos e créditos.
-* Relatório Diário Consolidado: O serviço gerará um relatório diário consolidado de saldo, mostrando as transações diárias e saldo do comerciante.
+## Solution Design
 
+For the proposed Cash Flow Management Service, we will use a combination of SQL Server, AWS, and C# to provide a scalable and reliable solution.
 
-## Requisitos Técnicos
+## Architecture Overview
 
+The solution will consist of three main components:
 
+1. Frontend: A web-based application that allows the merchant to input their daily transactions.
+2. Backend: A set of APIs written in C# that will handle the merchant's transactions and generate consolidated daily reports.
+3. POS: A local application installed on the point of sale computer.
 
-* Design da Solução: Projetaremos uma solução técnica que forneça uma explicação não técnica da arquitetura e seu funcionamento.
-* Linguagem de Implementação: Podemos usar qualquer linguagem que o comerciante preferir.
-* Melhores Práticas: Adotaremos as melhores práticas do setor, incluindo Padrões de Design, Padrões de Arquitetura, Princípios SOLID, etc.
-* Leia-me: Forneceremos um readme abrangente com instruções sobre como instalar a aplicação localmente, em um contêiner e como usar os serviços.
-* Hospedagem Pública: Hospedaremos a aplicação em um repositório público como o GitHub.
+## Technical Details
 
+![image](https://user-images.githubusercontent.com/19389281/227325768-965a7fd2-5caf-4b86-ac93-3b7c89fd7a71.png)
 
-## Design da Solução
+## POS Desktop
 
-Para o proposto Serviço de Gerenciamento de Fluxo de Caixa, usaremos uma combinação de SQL Server, AWS e C# para fornecer uma solução escalável e confiável.
+The POS will be an application installed on the operator's computer or mobile device, allowing uninterrupted operation in case of internet signal issues. All transactions will be stored locally until the internet connection is reestablished, at which point they will be synchronized with the management platform. This application will be built using Electron.js and will reuse modules already developed in the frontend.
 
+## POS Database
 
-## Visão Geral da Arquitetura
-
-A solução consistirá em três componentes principais:
-
-
-
-1. Frontend: uma aplicação baseada na web que permitirá ao comerciante inserir suas transações diárias.
-2. Backend: um conjunto de APIs escritas em C# que lidarão com as transações do comerciante e gerarão relatórios diários consolidados.
-
-
-# Detalhes técnicos
-
+The database will be SQL-based. We will use SQL Express to provide a scalable and reliable database solution. We will also use local folders to store any files or documents associated with the merchant's transactions.
 
 ## Frontend
 
-O frontend será uma aplicação baseada na web que permitirá que o comerciante insira suas transações diárias. Usaremos uma combinação de HTML, CSS e JavaScript para construir o frontend. Também utilizaremos um framework de frontend como o Angular ou React para fornecer uma interface responsiva e amigável ao usuário.
-
+The frontend will be a web-based application that allows the merchant to access reports, create products, categories, and manage their sales. We will use a combination of HTML, CSS, and JavaScript to build the frontend. We will also use a frontend framework like Angular or React to provide a responsive and user-friendly interface.
 
 ## Backend
 
-O backend consistirá em um conjunto de APIs escritas em C#. Essas APIs lidarão com as transações do comerciante e gerarão relatórios diários consolidados. Utilizaremos uma arquitetura de microsserviços para garantir escalabilidade e flexibilidade. Também usaremos Funções Lambda para fornecer computação sem servidor e garantir eficiência de custo.
+The backend will consist of a set of APIs written in C#. These APIs will handle the merchant's transactions and generate consolidated daily reports. We will use a microservices architecture to ensure scalability and flexibility. We will also use Lambda Functions to provide serverless computing and ensure cost efficiency.
 
+## Cloud Database
 
-## Banco de dados
+The database will be a DynamoDB hosted on AWS. We will use DynamoDB to provide a scalable and reliable database solution. We will also use Amazon S3 to store any files or documents associated with the merchant's transactions.
 
-O banco de dados será um DynamoDB hospedado na AWS. Usaremos o DynamoDB para fornecer uma solução de banco de dados escalável e confiável. Também usaremos o Amazon S3 para armazenar quaisquer arquivos ou documentos associados às transações do comerciante.
+## Integration
 
+The frontend and backend will communicate through REST APIs. The backend APIs will store the merchant's transactions in DynamoDB. The backend APIs will also generate consolidated daily reports, which will be stored in Amazon S3. The frontend will retrieve the daily reports from S3 and display them to the merchant.
 
-## Integração
+The POS will instantly synchronize with the cloud whenever there is an internet connection. When the signal fails, the information will be retained until the internet connection is restored.
 
-O frontend e o backend se comunicarão por meio de APIs REST. As APIs do backend armazenarão as transações do comerciante no DynamoDB. As APIs do backend também gerarão relatórios diários consolidados, que serão armazenados no Amazon S3. O frontend recuperará os relatórios diários do S3 e os exibirá para o comerciante.
+## Deployment
 
+The solution will be deployed on AWS. We will use S3 to host the frontend's static files and the backend's APIs. We will also use Amazon to host DynamoDB. Amazon S3 will be used to store any files or documents associated with the merchant's transactions.
 
-## Implantação
+The POS will be deployed as an executable. Upon the first launch, the cloud information will be automatically transferred to the POS, eliminating the need to recreate records already created online.
 
-A solução será implantada na AWS. Usaremos o S3 para hospedar os arquivos estáticos do frontend e as APIs do backend. Também usaremos o Amazon para hospedar o DynamoDB. O Amazon S3 será usado para armazenar quaisquer arquivos ou documentos associados às transações do comerciante.
+# Backend API
 
+The proposed Cash Flow Management Service will provide a set of APIs to handle the merchant's transactions and generate consolidated daily reports. Here are the details of the endpoints we will provide for the MVP:
 
-## 
+- POST /publish
 
+    This endpoint will allow the merchant to add, update, or delete a transaction. The request body must contain a message with the transaction details, such as the transaction type (debit or credit), amount, and description. The endpoint will return the request ID. Upon completion, the subscribing client will receive a notification with the same ID containing the operation result.
 
-# API de backend
+## Integration
 
-O serviço proposto de Gerenciamento de Fluxo de Caixa fornecerá um conjunto de APIs para lidar com as transações do comerciante e gerar relatórios diários consolidados. Aqui estão os detalhes dos endpoints que forneceremos para o MVP:
+The solution provides a set of APIs to handle the merchant's transactions and generate consolidated daily reports. These endpoints will allow the merchant to effectively manage their daily cash flow. By using these APIs, other systems can add, retrieve, update, and delete transactions, as well as retrieve consolidated daily reports for specific dates.
 
+# Overview
 
+![image](https://user-images.githubusercontent.com/19389281/227305160-c5e61089-664c-4a2e-a423-a3c1b8b6a662.png)
 
-* POST /publish
+# Microservices
 
-    Este endpoint permitirá que o comerciante adicione, atualize, ou delete uma transação. O corpo da solicitação deve conter uma mensagem com os detalhes da transação, como o tipo de transação (débito ou crédito), valor e descrição. O endpoint retornará o ID da solicitaçao. Ao ser concluído, o cliente subscriber receberá uma notificação com este mesmo ID contendo o resultado da operação.
+Miro Board:
+[Link to Miro Board](https://miro.com/app/board/uXjVMaXQeaY=/?share_link_id=411079338218)
 
+![image](https://user-images.githubusercontent.com/19389281/227304927-39c6f3d1-d73f-4755-8b64-c7f0a6deef1a.png)
 
+# Deliverables
 
-## Integração
+## Introduction
 
-A solução fornece um conjunto de APIs para lidar com as transações do comerciante e gerar relatórios diários consolidados. Esses endpoints permitirão ao comerciante gerenciar seu fluxo de caixa diário de forma eficaz. Ao usar essas APIs, outros sistemas poderão adicionar, recuperar, atualizar e excluir transações, além de recuperar relatórios diários consolidados para datas específicas.
+This project was proposed as part of a selection process for the position of architect with the goal of modernizing monolithic applications and implementing best practices in resilience, security, performance, maintainability, and future readiness. The developed project deals with a merchant's daily transactions, who needs to manage their cash flow and daily closure.
 
+Although not all requested deliverables have been provided for this evaluation, depending on trade-offs, the architecture does not always encompass all activities at first, varying greatly according to the architect's short, medium, and long-term vision. This work was developed to exemplify the skills required for the architect position. The most relevant activities of this project were elaborated in accordance with the requirements of the position.
 
-## 
+Like all architectural work, methodologies and base resources have been developed so that the project can be delivered to development teams using common practices but following established standards. These artifacts developed can be scaled and distributed independently into microservices in an event-driven serverless platform architecture, without affecting effort, deadlines, code clarity, and maintenance complexity of the development team.
 
+It is important to note that although there are characteristics of Over Engineering, this delivered test is also a basis for the proposal to modernize the current monolithic application, mentioned in the interview, considering similar experiences gained in other projects.
 
-# Visao Panoramica
+## LGPD / Privacy
 
+We have adopted strict security measures to ensure the privacy and protection of personal data in compliance with LGPD. In addition, we have implemented best practices for monitoring and logging, allowing the operations team to quickly identify and resolve issues without compromising the privacy and protection of personal data in use in the application at the time of inspection.
 
+## Unit Tests
 
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+Unit tests have been developed as one of the practices to ensure the quality of the code produced. Unit tests are a type of automated test that verifies the behavior of a code unit, such as a function or method, in isolation from the rest of the system. They are important to ensure that each part of the system is functioning correctly and in accordance with the established requirements.
 
+## Black Box Testing
 
-![alt_text](images/image1.png "image_tooltip")
+In addition to unit tests, Black Box tests ensure that the internal integration of the developed modules is appropriate before conducting integration tests. This test examines code units as a whole. Black Box tests should be automatically executed to identify if the development is ensuring adequate end-to-end behavior, without being susceptible to availability issues of the microservices, as in the case of integration tests. These tests can be used by build pipelines to prevent check-in policies and code coverage defined from being impacted when an external service is unreachable.
 
+## Code Coverage
 
+To ensure the quality of tests in new developments, a minimum code coverage of 80% has been defined. This means that at least 80% of the code needs to be tested to ensure that the application has an adequate level of test coverage. This approach allows the team to have more confidence in the software and ensures that potential errors are identified early, reducing the cost and time required for corrections.
 
-# Microserviços \
+Code coverage will be automatically assessed by the pipeline with each code delivery to the source control. If coverage is below 80%, the code delivery will be rejected, and the developer and their lead will be notified.
 
+## CI/CD Pipelines
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image2.png "image_tooltip")
-
-
-
-# Entregáveis
-
-
-## Introduçao
-
-Este projeto foi proposto como parte de um processo seletivo para o cargo de arquitetura com o objetivo de modernizar aplicações monolíticas e implementar boas práticas de resiliência, segurança, performance, manutenibilidade e preparação para o futuro. O projeto desenvolvido trata das transações diárias de um vendedor que precisa gerir seu fluxo de caixa e seu fechamento diário.
-
-Embora nem todos os entregáveis solicitados tenham sido disponibilizados para esta avaliaçao, dependendo de um trade-off, a arquitetura nem sempre contempla todas as atividades em um primeiro momento, variando muito de acordo com a visao de curto, medio e longo prazo do arquiteto. Este trabalho foi desenvolvido para exemplificar as habilidades necessárias para exercer o cargo de arquiteto. As atividades mais relevantes deste projeto foram elaboradas de acordo com as exigências do cargo.
-
-Como todo trabalho de arquitetura, foram desenvolvidas metodologias e recursos-base para que o projeto possa ser entregue aos times de desenvolvimento, utilizando práticas comuns, mas seguindo padrões estabelecidos. Esses artefatos desenvolvidos podem ser escalonados e distribuídos de forma independente em microserviços em uma arquitetura baseada em eventos de uma plataforma sem servidor, sem afetar o esforço, o prazo, a clareza de código e o nível de complexidade de manutenção do time de desenvolvimento.
-
-Foram adotadas como premissas para a nova solução que, por ter escopo reduzido, poderá sofrer muitas alterações e deve ser altamente escalável para aceitar novas funcionalidades de forma simples e com baixo impacto no time de desenvolvimento e nos usuários.
-
-A partir deste projeto entregue, é possível implantar novas funcionalidades e serviços sem prejuízos aos usuários, garantindo um uptime extremamente alto, mesmo diante de cenários catastróficos, devido à natureza robusta de uma aplicação serverless baseada em eventos.
-
-<span style="text-decoration:underline;">Nota:</span> Embora haja características de Over Engineering, este teste entregue também é uma base da proposta para modernizar a aplicação monolítica atual, mencionada na entrevista, considerando experiências similares adquiridas em outros projetos.
-
-
-## LGPD / Privacidade
-
-Adotamos medidas de segurança rigorosas para garantir a privacidade e proteção de dados pessoais em conformidade com a LGPD. Além disso, implementamos as melhores práticas de monitoramento e logging, permitindo que a equipe de operações possa identificar e solucionar problemas rapidamente, sem comprometer a privacidade e proteção de dados pessoais em uso na aplicação no momento da inspeção.
-
-
-## Testes unitários
-
-Foram desenvolvidos como uma das práticas para garantir a qualidade do código produzido. Os testes unitários são um tipo de teste automatizado que verifica o comportamento de uma unidade de código, como uma função ou um método, isoladamente do restante do sistema. Eles são importantes para garantir que cada parte do sistema está funcionando corretamente e em conformidade com os requisitos estabelecidos.
-
-
-## Testes blackbox
-
-Juntamente com os testes unitários, BlackBoxes garantem que a integração interna dos módulos desenvolvidos esteja adequada antes de realizar testes de integração. Este teste testa as unidades de código como um todo. Testes blackbox devem ser executados automaticamente para identificar se o desenvolvimento está garantindo um comportamento ponta-a-ponta adequado, sem estar suscetível a intempéries de disponibilidade dos microserviços, como no caso dos testes de integração. Estes testes podem ser utilizados pelas pipelines de build para evitar que as políticas de checkin e cobertura de código definidas sejam impactadas quando um serviço externo está inalcançável.
-
-
-## Cobertura de código 
-
-Para assegurar a qualidade dos testes em novos desenvolvimentos, foi definida uma cobertura mínima de código de 80%. Isso significa que, pelo menos, 80% do código precisa ser testado para garantir que a aplicação tenha um nível adequado de cobertura de testes. Dessa forma, a equipe pode ter mais confiança no software e garantir que possíveis erros sejam identificados precocemente, reduzindo os custos e tempo necessários para correções.
-
-A cobertura de código será avaliada automaticamente pela pipeline a cada entrega de código no source control. Caso a cobertura seja inferior a 80%, a entrega do código será recusada e o desenvolvedor e seu lead serão notificados.
-
-
-## Pipelines de CI/CD 
-
-A pipeline de CI/CD implementada neste projeto foi configurada para ser multi-ambiente, multi-projeto, flexível e segura, garantindo que o processo de entrega de funcionalidades esteja aderindo às boas práticas estabelecidas. Cada ambiente (DEV, UAT, PRD) possui grupos de variáveis para tornar a pipeline genérica e fácil de ser utilizada com outros ambientes. Além disso, a pipeline utiliza o Azure Vault para armazenar os segredos, que são obtidos em tempo de execução da pipeline e inseridos automaticamente no appsettings da solução, eliminando a necessidade de intervenção manual, exposição dos segredos e o uso de ferramentas de terceiros para a tarefa. Essa abordagem garante maior segurança e simplicidade no processo de entrega de funcionalidades.
-
+The CI/CD pipeline implemented in this project has been configured to be multi-environment, multi-project, flexible, and secure, ensuring that the process of delivering features adheres to established best practices. Each environment (DEV, UAT, PRD) has variable groups to make the pipeline generic and easy to use with other environments. In addition, the pipeline uses Azure Vault to store secrets, which are obtained at runtime from the pipeline and automatically inserted into the solution's appsettings, eliminating the need for manual intervention, exposure of secrets, and the use of third-party tools for the task. This approach ensures greater security and simplicity in the feature delivery process.
 
 ## Branching
 
-Para gerenciar o desenvolvimento dos microserviços e garantir a qualidade do código, foi estabelecido o uso do Gitflow. Além disso, foram adicionadas algumas adaptações específicas da solução, como a implementação de serverless, testes unitários, testes blackbox e cobertura de código. Essas políticas de branching garantem um fluxo de trabalho mais organizado e eficiente para o desenvolvimento e entrega dos serviços.
+To manage the development of microservices and ensure code quality, the use of Gitflow has been established. In addition, some specific adaptations of the solution, such as the implementation of serverless, unit tests, black box tests, and code coverage, have been added. These branching policies ensure a more organized and efficient workflow for development and feature delivery.
 
+## Check-In
 
-## Checkin
+To maintain code quality and integrity, it has been established that code check-in is only allowed on the feature and hotfix branches. This prevents the mixing of untested or incomplete code with the main version of the software. Feature branches allow developers to work on new features without affecting the main version of the software, while hotfix branches are used to fix critical issues in the current version. These check-in policies ensure code quality and minimize potential conflicts during the continuous integration process.
 
-Para manter a qualidade e integridade do código, foi estabelecido que o checkin do código só é permitido nas branches feature e hotfix. Dessa forma, evita-se a mistura de código não testado ou incompleto com a versão principal do software. As branches de feature permitem que os desenvolvedores trabalhem em novas funcionalidades sem afetar a versão principal do software, enquanto as branches de hotfix são utilizadas para corrigir problemas críticos na versão atual. Essas políticas de checkin garantem a qualidade do código e minimizam possíveis conflitos durante o processo de integração contínua.
+## Testing
 
+In this project, the following testing policies will be adopted:
 
-## Testes
+- Unit tests and black box tests will be automatically executed after the completion of feature development.
+- Unit tests will ensure that the system is reliably modular and expedite the identification of technical failures.
+- Black box tests will be implemented without querying external data to identify if development is ensuring appropriate end-to-end behavior. To achieve this, all external data must be mocked according to the structure provided in the solution.
 
-Neste projeto, serão adotadas as seguintes políticas de testes:
+## Microservices
 
+Microservices are an important part of an event-based architecture, and as such, they need to be developed with patterns and consistency in mind. Predictability is crucial because microservices can add extra layers of complexity to the architecture, and a lack of predictability can lead to scalability and performance issues. One way to standardize the behavior of microservices is to define standards for the HTTP status codes they return. This helps ensure that developers of other services can handle responses consistently and predictably.
 
+Expected Responses:
 
-* Testes unitários e testes blackbox serão executados automaticamente após a conclusão do desenvolvimento das funcionalidades.
-* Testes unitários irão garantir que o sistema está confiável de forma modular e agilizam a identificação de falhas técnicas.
-* Testes blackbox serão implementados sem a consulta a dados externos, para identificar se o desenvolvimento está garantindo um comportamento adequado de ponta a ponta. Para isso, todos os dados externos devem ser mockados conforme a estrutura fornecida na solução.
+- 200 - Ok: Indicates that the request was successful, and the response content is as expected.
+- 400 - Bad Request: Indicates that the client's request is invalid or malformed and cannot be processed by the server.
+- 401 - Unauthorized: Indicates that the client is not authenticated and does not have permission to access the requested resource.
+- 403 - Forbidden: Indicates that the client does not have permission to access the requested resource, even if authenticated.
+- 500 - Internal Server Error: Indicates that an internal server error occurred while processing the request.
 
+Additionally, another way to ensure standardization of the objects that microservices return is to package them in a standardized way to ensure consistency.
 
-## Microservicos
+## Development Patterns
 
-Microserviços são uma parte importante da arquitetura baseada em eventos e, como tal, precisam ser desenvolvidos com padrões e consistência em mente. A previsibilidade é crucial, pois os microserviços podem adicionar camadas extras de complexidade à arquitetura, e a falta de previsibilidade pode levar a problemas de escalabilidade e desempenho. Uma forma de padronizar o comportamento dos microserviços é definir padrões para os códigos de status HTTP que eles retornam. Isso ajuda a garantir que os desenvolvedores de outros serviços possam lidar com as respostas de maneira consistente e previsível. 
-
-
-#### Respostas esperadas
-
-
-
-* 200 - Ok: indica que a solicitação foi bem-sucedida e o conteúdo da resposta é o esperado.
-* 400 - Bad Request: indica que a solicitação do cliente é inválida ou malformada e não pode ser processada pelo servidor.
-* 401 - Unauthorized: indica que o cliente não está autenticado e não tem permissão para acessar o recurso solicitado.
-* 403 - Forbidden: indica que o cliente não tem permissão para acessar o recurso solicitado, mesmo que esteja autenticado.
-* 500 - Internal Server Error: indica que ocorreu um erro interno no servidor ao processar a solicitação.
-
-Além disso, outra forma de garantir a padronização dos objetos que os microserviços retornam, é torná-los empacotados de forma padronizada para garantir a consistência.
-
-
-
-
-## Padrões de desenvolvimento
-
-Para o desenvolvimento desta solução, foi utilizado DRY, YAGNI, SOLID, SAGA. É importante mencionar que esta solução irá beneficiar-se de um design modular e escalável, seguindo as melhores práticas de arquitetura, como a separação de preocupações (SoC), que permite que cada módulo da aplicação tenha uma única responsabilidade bem definida. Além disso, a solução foi construída utilizando padrões de design de software que favorecem a reutilização de código, a simplicidade, a legibilidade e a manutenção, como o padrão de Injeção de Dependências e o padrão de Repositório.
-
-Para garantir a segurança da aplicação, foram implementadas práticas de segurança de software, como a validação de entrada de dados, autenticação e autorização, e criptografia de dados sensíveis. Além disso, foram adotadas as melhores práticas de monitoramento e logging, permitindo que a equipe de operações possa identificar e solucionar problemas rapidamente sem comprometer os dados pessoais em curso na aplicação no momento da inspeção.
-
-Por fim, é importante destacar que a solução foi construída com base em uma arquitetura serverless baseada em eventos, que permite que a aplicação seja escalável, tolerante a falhas e altamente disponível. Isso significa que a solução pode ser facilmente escalada e gerenciada em uma infraestrutura de nuvem, proporcionando um ambiente de desenvolvimento e implantação mais eficiente, ágil e seguro.
-
-
-# Priorizaçao MoSCoW
-
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image3.png "image_tooltip")
-
-
-
-# Matriz de Prioridade
-
-
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/image4.png "image_tooltip")
-
+For the development of this solution, DRY, YAGNI, SOLID, SAGA have been used. It is important to mention that this solution will benefit from a modular and scalable design, following architectural best practices such as Separation of Concerns (SoC), which allows each module of the application to have a single well-defined responsibility. Additionally, the solution was built using software design patterns that favor code reuse, simplicity

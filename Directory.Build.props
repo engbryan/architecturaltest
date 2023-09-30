@@ -1,0 +1,54 @@
+<Project>
+    <PropertyGroup>
+        <LangVersion>10</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <IsTestProject>false</IsTestProject>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <!--
+        NoWarn explanations:
+        1701,1702: By default these are NoWarn on .NET Core. See https://github.com/dotnet/roslyn/issues/19640
+        CA1062: Nullable reference types make this unnecessary.
+        CA2007: We do not need to call ConfigureAwait on awaited tasks. See https://github.com/MicrosoftDocs/visualstudio-docs/issues/5216
+        CA1305: We set the culture on startup.
+        CA1303,CA1304: We are not localizing the app.
+
+        NU1803:	You are running the 'restore' operation with an 'HTTP' source, 'http://Bryannexus/repository/FICC-FX-Snapshots/'. Non-HTTPS access will be removed in a future version. Consider migrating to an 'HTTPS' source.		
+        SA1124:	Do not use regions	
+        S1135: Complete the task associate to this TODO comment 
+        S101: Rename class 'xxx' to match pascal case naming rules, consider using ...
+        S1075: Refactor your code not to use hardcoded absolute paths or URIs.	
+        S2326:'T' is not used in the interface.	
+        S112: 'System.Exception' should not be thrown by user code.	
+        S125: Remove this commented out code.	
+        SA1512:	Single-line comments should not be followed by blank line	
+        -->
+        <NoWarn>
+            1701;1702;CA1062;CA2007;CA1305;CA1303;CA1304;AD0001;S3903;S1172;SA1118;SA1201;SA1111;SA3604;
+            ;NU1803;SA1124;S1135;S101;S1075;S2326;S112;S125;SA1512
+        </NoWarn>
+        <!--
+            This is to solve error NU1403, see issues bellow for an explanation.
+            https://github.com/NuGet/Home/issues/8574
+            https://github.com/NuGet/Home/issues/7921
+            https://github.com/NuGet/Home/issues/7414
+            https://github.com/dotnet/sdk/issues/4073
+            https://github.com/NuGet/docs.microsoft.com-nuget/issues/1998
+        -->
+        <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+    <ItemGroup>
+        <SonarQubeSetting Include="sonar.coverage.exclusions">
+            <Value>**/Program.cs</Value>
+        </SonarQubeSetting>
+    </ItemGroup>
+</Project>

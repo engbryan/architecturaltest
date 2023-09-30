@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Amazon.Lambda.AspNetCoreServer" Version="5.3.0" />
+		<PackageReference Include="Amazon.Lambda.TestUtilities" Version="1.2.0" />
+		<!--<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.17" />-->
+		<PackageReference Include="NetCore.AutoRegisterDi" Version="2.1.0" />
+		<PackageReference Include="Open-XML-SDK" Version="2.9.1" />
+
+		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="6.0.5" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.5" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="6.0.5" />
+		<PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.3" />
+
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="MicroElements.Swashbuckle.FluentValidation" Version="5.7.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+
+		<PackageReference Include="prometheus-net.DotNetRuntime" Version="4.2.4" />
+		<PackageReference Include="prometheus-net.AspNetCore" Version="6.0.0" />
+
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.1" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+		<PackageReference Include="Serilog.Enrichers.CorrelationId" Version="3.0.1" />
+		<PackageReference Include="Serilog.Enrichers.ClientInfo" Version="1.2.0" />
+		<PackageReference Include="Serilog.Enrichers.Demystify" Version="1.0.0-dev-00019" />
+		<PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
+		<PackageReference Include="Serilog.Formatting.Elasticsearch" Version="8.4.1" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+		<PackageReference Include="Serilog.Sinks.Seq" Version="5.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Bryan.Proof.Auth.Api.Tests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Bryan.Proof.Auth.Api.Client\Bryan.Proof.Auth.Api.Client.csproj" />
+		<ProjectReference Include="..\Bryan.Proof.Auth.Domain\Bryan.Proof.Auth.Domain.csproj" />
+		<ProjectReference Include="..\Bryan.Proof.Auth.Ioc\Bryan.Proof.Auth.IoC.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Bryan.Proof.Auth.Api.Client.Dtos" />
+		<Using Include="Bryan.Proof.Auth.Domain" />
+		<Using Include="Bryan.MethodResult" />
+		<Using Include="MediatR" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="AWS\cf-Proof-bucket.template">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="AWS\cf-apigateway.template">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="AWS\cf-Proof-bucket.template">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="AWS\serverless.template">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+</Project>

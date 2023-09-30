@@ -1,0 +1,120 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Transform": "AWS::Serverless-2016-10-31",
+    "Description": "Stack com recursos de autenticação no APIGateway do Proof",
+    "Parameters": {
+        "Stage": {
+            "Type": "String",
+            "AllowedValues": [
+                "dev",
+                "uat",
+                "prod"
+            ],
+            "Default": "dev"
+        }
+    },
+    "Resources": {
+        "apiGatewayProof": {
+            "Type": "AWS::ApiGateway::RestApi",
+            "Properties": {
+                "Name": "BryanProofGateway",
+                "Description": "API Gateway para API do Proof",
+                "ApiKeySourceType": "HEADER",
+                "EndpointConfiguration": {
+                    "Types": [
+                        "EDGE"
+                    ]
+                },
+                "Tags": [
+                    {
+                        "Value": "BryanProofGateway",
+                        "Key": "ApiGatewayProof"
+                    }
+                ]
+            }
+        },
+        "apiGatewayProofResource": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+                "ParentId": {
+                    "Fn::GetAtt": [
+                        "apiGatewayProof",
+                        "RootResourceId"
+                    ]
+                },
+                "PathPart": "API",
+                "RestApiId": {
+                    "Ref": "apiGatewayProof"
+                }
+            }
+        },
+        "apiGatewayProofProxyResource": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+                "ParentId": {
+                    "Ref": "apiGatewayProofResource"
+                },
+                "PathPart": "{proxy+}",
+                "RestApiId": {
+                    "Ref": "apiGatewayProof"
+                }
+            }
+        },
+        "apiGatewayProofProxyMethod": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+                "ResourceId": {
+                    "Ref": "apiGatewayProofProxyResource"
+                },
+                "RestApiId": {
+                    "Ref": "apiGatewayProof"
+                },
+                "ApiKeyRequired": true,
+                "AuthorizationType": "NONE",
+                "HttpMethod": "ANY",
+                "MethodResponses":[{
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                        "method.response.header.Access-Control-Allow-Headers": true, 
+                        "method.response.header.Access-Control-Allow-Methods": true,
+                        "method.response.header.Access-Control-Allow-Origin": true
+                     }
+                },{
+                    "StatusCode": "403",
+                    "ResponseParameters": {
+                        "method.response.header.Access-Control-Allow-Headers": true, 
+                        "method.response.header.Access-Control-Allow-Methods": true,
+                        "method.response.header.Access-Control-Allow-Origin": true
+                     }
+                }],
+                "Integration": {
+                    "Type": "AWS_PROXY",
+                    "IntegrationHttpMethod": "POST",
+                    "Uri": {
+                        "Fn::Sub": [
+                            "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations",
+                            {
+                                "lambdaArn": {
+                                    "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:Bryan-Proof-Auth-Api"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "ProofAPIPermission": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "FunctionName": {
+                    "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:Bryan-Proof-Auth-Api"
+                },
+                "Action": "lambda:InvokeFunction",
+                "Principal": "apigateway.amazonaws.com",
+                "SourceArn": {
+                    "Fn::Sub": "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${apiGatewayProof}/*/*/API/*"
+                }
+            }
+        }
+    }
+}

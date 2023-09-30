@@ -1,0 +1,107 @@
+[
+  {
+    "Description": "WM",
+    "DisplayName": "Proof-role-wm",
+    "Id": "4e8e8e1f-83ff-4683-86ba-dd8cdb73e3bf",
+    "IsEnabled": true,
+    "Value": "Proof-role-wm"
+  },
+  {
+    "Description": "Funds",
+    "DisplayName": "Proof-role-funds",
+    "Id": "4ce925a5-d3b6-4b25-a5bf-3c37bf0a19bf",
+    "IsEnabled": true,
+    "Value": "Proof-role-funds"
+  },
+  {
+    "Description": "Bryan  Empresas",
+    "DisplayName": "Proof-role-business",
+    "Id": "626dde3f-1441-4181-9847-1ad278064a9b",
+    "IsEnabled": true,
+    "Value": "Proof-role-business"
+  },
+  {
+    "Description": "SignHub",
+    "DisplayName": "signhub-role-it",
+    "Id": "456abb33-3fe0-4df4-84d1-0d4c8d1c89ed",
+    "IsEnabled": true,
+    "Value": "signhub-role-it"
+  },
+  {
+    "Description": "Câmbio",
+    "DisplayName": "Proof-role-fx",
+    "Id": "79e870d1-36fe-4eaa-8d55-7be737e5e619",
+    "IsEnabled": true,
+    "Value": "Proof-role-fx"
+  },
+  {
+    "Description": "Onboarding",
+    "DisplayName": "Proof-role-onboarding",
+    "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9",
+    "IsEnabled": true,
+    "Value": "Proof-role-onboarding"
+  },
+  {
+    "Description": "MYNT",
+    "DisplayName": "Proof-role-mynt",
+    "Id": "10b1beea-ec30-4de7-bf76-2db1f196c222",
+    "IsEnabled": true,
+    "Value": "Proof-role-mynt"
+  },
+  {
+    "Description": "Middle OTC",
+    "DisplayName": "Proof-role-otc",
+    "Id": "465c2ad6-b20d-453f-94da-9438ae03f35c",
+    "IsEnabled": true,
+    "Value": "Proof-role-otc"
+  },
+  {
+    "Description": "Crédito",
+    "DisplayName": "Proof-role-credit",
+    "Id": "eb3d82e3-dc85-477b-9557-79caa346f324",
+    "IsEnabled": true,
+    "Value": "Proof-role-credit"
+  },
+  {
+    "Description": "Energia",
+    "DisplayName": "Proof-role-energy",
+    "Id": "539382ac-9c39-4242-919d-7753607af783",
+    "IsEnabled": true,
+    "Value": "Proof-role-energy"
+  },
+  {
+    "Description": "Partnership",
+    "DisplayName": "Proof-role-partnership",
+    "Id": "f72411f8-7ded-4f01-bd8b-caf275d6334f",
+    "IsEnabled": true,
+    "Value": "Proof-role-partnership"
+  },
+  {
+    "Description": "BaaS",
+    "DisplayName": "Proof-role-baas",
+    "Id": "4c879caa-b95f-4ec3-afb8-af653d28de30",
+    "IsEnabled": true,
+    "Value": "Proof-role-baas"
+  },
+  {
+    "Description": "Corretora",
+    "DisplayName": "Proof-role-broker",
+    "Id": "e1ef953a-fd32-4a20-b584-cac2b72b3f6b",
+    "IsEnabled": true,
+    "Value": "Proof-role-broker"
+  },
+  {
+    "Description": "Special Situation",
+    "DisplayName": "Proof-role-ss",
+    "Id": "7d462690-b9ef-47b0-ab11-03ff4e8c71ee",
+    "IsEnabled": true,
+    "Value": "Proof-role-ss"
+  },
+  {
+    "Description": "Automation",
+    "DisplayName": "Proof-role-automation",
+    "Id": "439f0538-e635-48eb-9fb6-df3e96bc41c4",
+    "IsEnabled": true,
+    "Value": "Proof-role-automation"
+  }
+]

@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>annotations</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Dynamo\Entities\MarketTypeEntity.cs" />
+		<Compile Remove="Dynamo\Entities\MarketTypeEntityMap.cs" />
+		<Compile Remove="Dynamo\MarketTypeDbStore.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Identity.Web" Version="1.8.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Bryan.Dynamo.Abstractions\Bryan.Dynamo.Abstractions.csproj" />
+	</ItemGroup>
+
+	<!--<ItemGroup>
+		<Reference Include="Hermes">
+			<HintPath>..\ExternalReferences\Hermes.dll</HintPath>
+		</Reference>
+	</ItemGroup>-->
+
+	<ItemGroup>
+		<Using Include="Bryan.MethodResult" />
+		<Using Include="Bryan.TokenAuth.Config" />
+		<Using Include="Bryan.TokenAuth.Constants" />
+		<Using Include="Bryan.TokenAuth.Entities" />
+		<Using Include="Bryan.TokenAuth.Extensions" />
+		<Using Include="Bryan.TokenAuth.Implementations" />
+		<Using Include="Bryan.TokenAuth.Interfaces" />
+		<Using Include="Bryan.TokenAuth.Repositories" />
+		<Using Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+		<Using Include="Microsoft.AspNetCore.Authorization" />
+		<Using Include="Microsoft.Extensions.Configuration" />
+		<Using Include="Microsoft.Extensions.DependencyInjection" />
+		<Using Include="Microsoft.Identity.Web" />
+		<Using Include="System.IdentityModel.Tokens.Jwt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Dynamo\Entities\" />
+	</ItemGroup>
+
+</Project>

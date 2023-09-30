@@ -1,0 +1,73 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Transform": "AWS::Serverless-2016-10-31",
+    "Description": "Stack com o API de Autenticação Proof",
+    "Parameters": {
+        "Stage": {
+            "Type": "String",
+            "AllowedValues": [
+                "dev",
+                "uat",
+                "prod"
+            ],
+            "Default": "dev"
+        }
+    },
+    "Mappings": {
+        "Environment": {
+          "dev": {
+            "ENVIRONMENT": "Development",
+            "Subnets": [ "subnet-09f516ee194804937", "subnet-096ccd49122115ee5", "subnet-0114544c9d6e66ad3" ],
+            "SecurityGroups": [ "sg-03331b7f53d805a76", "sg-085ee46b79d141ee3", "sg-0991fdfa55886674d" ]
+          },
+          "uat": {
+            "ENVIRONMENT": "Staging",
+            "Subnets": [ "subnet-0067e10535a4e8ab6", "subnet-0593fda7e2e9e5cb3", "subnet-0852039ce0b0fe7fc" ],
+            "SecurityGroups": [ "sg-01d9ebe28c5b61223", "sg-05fc4e01e48d0c7b7", "sg-0c6ee129ec9512b22" ]
+          },
+          "prod": {
+            "ENVIRONMENT": "Production",
+            "Subnets": [ "subnet-096af4929adaf96a3", "subnet-0183fb08836fc9e9f", "subnet-058101196d11f8cbe" ],
+            "SecurityGroups": [ "sg-0a91630b0ebd8a362", "sg-0dbdbfb13d41f682c", "sg-0f0fafabfb1ff47aa" ]
+          }
+        }
+    },
+    "Resources": {
+        "LambdaProofApi": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "Bryan.Proof.Auth.Api::Bryan.Proof.Auth.Api.LambdaEntryPoint::FunctionHandlerAsync",
+                "FunctionName": "Bryan-Proof-Auth-Api",
+                "Role": {
+                    "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/role-lambda-default"
+                },
+                "Runtime": "net6",
+                "Code": {},
+                "Timeout": 120,
+                "MemorySize" : "1024",
+                "Environment": {
+                    "Variables": {
+                        "ENVIRONMENT": { "Fn::FindInMap": [ "Environment", { "Ref": "Stage" }, "ENVIRONMENT" ] }
+                    }
+                },
+                "VpcConfig": {
+                    "SecurityGroupIds" : { "Fn::FindInMap": [ "Environment", { "Ref": "Stage" }, "SecurityGroups" ] },
+                    "SubnetIds" : { "Fn::FindInMap": [ "Environment", { "Ref": "Stage" }, "Subnets" ] }
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "ApiProofLambdaArn": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "LambdaProofApi",
+                    "Arn"
+                ]
+            },
+            "Export": {
+                "Name": "ApiProofLambdaArn"
+            }
+        }
+    }
+}

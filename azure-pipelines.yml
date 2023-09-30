@@ -1,0 +1,93 @@
+name: $(Build.DefinitionName)_$(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/develop
+
+jobs:
+- job: Job_1
+  displayName: Build, Test, and Measure Code Coverage for net6.x Solution
+  
+  pool:
+    name: DotNetV2
+  
+  variables:
+  - group: Proof.Auth
+  - group: DEV
+  
+  steps:
+  - checkout: self
+    clean: true
+  
+  - task: UseDotNet@2
+    displayName: Using .NET Core sdk 6.x
+    inputs:
+      version: 6.x
+  
+  - task: DotNetCoreCLI@2
+    displayName: Restoring Packages
+    inputs:
+      command: restore
+      restoreArguments: -s https://api.nuget.org/v3/index.json  -s http://TARepository/NuGet/SDK/NuGet  -s https://Bryan.pkgs.visualstudio.com/_packaging/PackageFTS/nuget/v3/index.json
+      noCache: true
+  
+  - task: FileTransform@1
+    displayName: Updating appsettings.$(ASPNETCORE_ENVIRONMENT).json
+    inputs:
+      folderPath: '$(System.DefaultWorkingDirectory)'
+      fileType: 'json'
+      targetFiles: '**/appsettings.$(ASPNETCORE_ENVIRONMENT).json'
+  
+  - task: SetVariable@1
+    condition: eq(variables['RunBlackboxes'], 'true')
+    displayName: Adding Blackbox tests
+    inputs:
+      name: 'TestMode'
+      value: 'blackbox'
+  
+  - task: DotNetCoreCLI@2
+    displayName: Running Tests
+    inputs:
+      command: 'test'
+      arguments: '--collect "Code coverage"'
+  
+  - task: BuildQualityChecks@8
+    displayName: Measuring Test Coverage
+    inputs:
+      checkCoverage: true
+      coverageFailOption: 'fixed'
+      coverageType: 'lines'
+      coverageThreshold: '80'
+  
+  - task: SetVariable@1
+    displayName: Changing Test Mode to Integration
+    inputs:
+      name: 'TestMode'
+      value: 'Integration'
+  
+  - task: DotNetCoreCLI@2
+    displayName: Running Integration Tests
+    inputs:
+      command: 'test'
+  
+  - task: CmdLine@2
+    displayName: Installing Amazon.Lambda.Tools
+    inputs:
+      script: |
+        dotnet tool list -g | find/i "dotnet-lambda"
+        IF %ERRORLEVEL% EQU 1 (
+          dotnet tool install -g Amazon.Lambda.Tools --add-source https://nuget.org --ignore-failed-sources
+        )
+  
+  - task: CmdLine@2
+    displayName: Creating Lambda Deploy Package as $(Configuration)
+    inputs:
+      script: dotnet lambda package-ci --on-failure DELETE --template src\$(RootProjectName)\AWS\serverless.template --region sa-east-1 --output-template $(Build.ArtifactStagingDirectory)/deploy.yaml --s3-bucket sh-bucket-dev --s3-prefix $(System.TeamProject)/$(Build.BuildNumber) --profile Bryan-Proof-dev  /p:SolutionDir=%SOLUTION_DIR%
+  
+  - task: PublishBuildArtifacts@1
+    displayName: Publishing Build Artifacts
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      publishLocation: 'FilePath'
+      TargetPath: '$(ArtifactsDropFolder)\$(Build.BuildNumber)'

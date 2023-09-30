@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.12" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageReference Include="Shimi" Version="1.0.5" />
+    <PackageReference Include="xunit" Version="2.4.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bryan.Packages\Bryan.TokenAuth\Bryan.TokenAuth.csproj" />
+    <ProjectReference Include="..\..\src\Auth\Bryan.Proof.Auth.Api.Client\Bryan.Proof.Auth.Api.Client.csproj" />
+    <ProjectReference Include="..\..\src\Auth\Bryan.Proof.Auth.Api\Bryan.Proof.Auth.Api.csproj" />
+    <ProjectReference Include="..\..\src\Auth\Bryan.Proof.Auth.Domain\Bryan.Proof.Auth.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Auth\Bryan.Proof.Auth.Ioc\Bryan.Proof.Auth.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="TestBase\Mocked\graphService.GetApplicationRoles.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestBase\Mocked\graphService.GetUser.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestBase\Mocked\marketRepository.GetAll.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="testhost.runtimeconfig.json">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BlackBoxTests\User\GetInfo\InvalidUserPass\Mocked\tokenGenerator.GetSystemToken.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BlackBoxTests\User\GetInfo\InvalidUserPass\Mocked\tokenGenerator.GetUserToken.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BlackBoxTests\User\GetInfo\InvalidUserPass\post.wrongEmailPassword.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BlackBoxTests\User\GetInfo\ValidUserPass\Mocked\tokenGenerator.GetSystemToken.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BlackBoxTests\User\GetInfo\ValidUserPass\Mocked\tokenGenerator.GetUserToken.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="BlackBoxTests\User\GetInfo\ValidUserPass\post.correctEmailPassword.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Bryan.Proof.Auth.Domain.App" />
+		<Using Include="Bryan.Proof.Auth.Api.Client.Dtos" />
+	</ItemGroup>
+
+</Project>

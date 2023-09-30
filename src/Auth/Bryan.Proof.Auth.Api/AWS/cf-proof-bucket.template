@@ -1,0 +1,459 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Transform"                : "AWS::Serverless-2016-10-31",
+    "Description"              : "Stack com o Bucket S3 Proof",
+    "Parameters"               : {
+        "Stage" : {
+            "Type" : "String",
+            "AllowedValues" : [
+                "dev",
+                "uat",
+                "prod"
+            ],
+            "Default"       : "dev"
+        }
+    },
+    "Conditions"               : {
+        "CreateUatResources" : {
+            "Fn::Equals" : [
+                {
+                    "Ref" : "Stage"
+                },
+                "uat"
+            ]
+        },
+        "CreateDevResources" : {
+            "Fn::Equals" : [
+                {
+                    "Ref" : "Stage"
+                },
+                "dev"
+            ]
+        },
+        "CreateProdResources" : {
+            "Fn::Equals" : [
+                {
+                    "Ref" : "Stage"
+                },
+                "prod"
+            ]
+        }
+    },
+    "Mappings"                 : {
+        "Environment" : {
+            "dev" : {
+                "ENVIRONMENT" : "Development",
+                "Bucket"      : "sh-bucket-dev"
+            },
+            "uat" : {
+                "ENVIRONMENT" : "Staging",
+                "Bucket"      : "sh-bucket-uat"
+            },
+            "prod" : {
+                "ENVIRONMENT" : "Production",
+                "Bucket"      : "sh-bucket"
+            }
+        }
+    },
+    "Resources"                : {
+        "ProofBucket" : {
+            "Type" : "AWS::S3::Bucket",
+            "DependsOn" : [
+                "MonitorLambdaPermission",
+                "OperationS3LambdaPermission"
+            ],
+            "Properties" : {
+                "BucketName" : {
+                    "Fn::FindInMap" : [
+                        "Environment",
+                        {
+                            "Ref" : "Stage"
+                        },
+                        "Bucket"
+                    ]
+                },
+                "CorsConfiguration" : {
+                    "CorsRules" : [
+                        {
+                            "AllowedHeaders" : [
+                            ],
+                            "AllowedMethods" : [
+                                "PUT",
+                                "GET"
+                            ],
+                            "AllowedOrigins" : [
+                                "*"
+                            ],
+                            "ExposedHeaders" : [
+                            ]
+                        }
+                    ]
+                },
+                "PublicAccessBlockConfiguration" : {
+                    "BlockPublicAcls" : true,
+                    "BlockPublicPolicy" : true,
+                    "IgnorePublicAcls"  : false,
+                    "RestrictPublicBuckets" : false
+                },
+                "VersioningConfiguration"        : {
+                    "Status" : "Suspended"
+                },
+                "NotificationConfiguration"      : {
+                    "LambdaConfigurations" : [
+                        {
+                            "Event" : "s3:ObjectCreated:*",
+                            "Filter" : {
+                                "S3Key" : {
+                                    "Rules" : [
+                                        {
+                                            "Name" : "prefix",
+                                            "Value" : "Monitor/"
+                                        }
+                                    ]
+                                }
+                            },
+                            "Function" : {
+                                "Fn::Join" : [
+                                    "",
+                                    [
+                                        "arn:aws:lambda:",
+                                        {
+                                            "Ref" : "AWS::Region"
+                                        },
+                                        ":",
+                                        {
+                                            "Ref" : "AWS::AccountId"
+                                        },
+                                        ":function:Bryan-Proof-Monitor-S3"
+                                    ]
+                                ]
+                            }
+                        },
+                        {
+                            "Event" : "s3:ObjectCreated:*",
+                            "Filter" : {
+                                "S3Key" : {
+                                    "Rules" : [
+                                        {
+                                            "Name" : "prefix",
+                                            "Value" : "TempFiles/OperationSpreadsheets/"
+                                        },
+                                        {
+                                            "Name" : "suffix",
+                                            "Value" : ".xlsx"
+                                        }
+                                    ]
+                                }
+                            },
+                            "Function" : {
+                                "Fn::Join" : [
+                                    "",
+                                    [
+                                        "arn:aws:lambda:",
+                                        {
+                                            "Ref" : "AWS::Region"
+                                        },
+                                        ":",
+                                        {
+                                            "Ref" : "AWS::AccountId"
+                                        },
+                                        ":function:Bryan-Proof-Integrate-Operation-S3"
+                                    ]
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "LifecycleConfiguration"         : {
+                    "Rules" : [
+                        {
+                            "Id" : "TempRule",
+                            "Prefix" : "TempFiles/",
+                            "ExpirationInDays" : 7,
+                            "Status"           : "Enabled"
+                        }
+                    ]
+                },
+                "Tags"                           : [
+                    {
+                        "Value" : "Proof",
+                        "Key"   : "Bucket"
+                    }
+                ]
+            }
+        },
+        "ProofDevBucketPolicy" : {
+            "Type" : "AWS::S3::BucketPolicy",
+            "DependsOn" : "ProofBucket",
+            "Condition" : "CreateDevResources",
+            "Properties" : {
+                "Bucket" : {
+                    "Ref" : "ProofBucket"
+                },
+                "PolicyDocument" : {
+                    "Id" : "ProofBucketDEVPolicy",
+                    "Statement" : [
+                        {
+                            "Effect" : "Allow",
+                            "Principal" : {
+                                "AWS" : [
+                                    {
+                                        "Fn::Join" : [
+                                            "",
+                                            [
+                                                "arn:aws:iam::",
+                                                {
+                                                    "Ref" : "AWS::AccountId"
+                                                },
+                                                ":role/role-lambda-default"
+                                            ]
+                                        ]
+                                    },
+                                    {
+                                        "Fn::Join" : [
+                                            "",
+                                            [
+                                                "arn:aws:iam::",
+                                                {
+                                                    "Ref" : "AWS::AccountId"
+                                                },
+                                                ":role/aws-reserved/sso.amazonaws.com/AWSReservedSSO_Proof-dev_4929e839b7c0130b"
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            },
+                            "Action"    : [
+                                "s3:*"
+                            ],
+                            "Resource"  : [
+                                {
+                                    "Fn::Join" : [
+                                        "",
+                                        [
+                                            {
+                                                "Fn::GetAtt" : [
+                                                    "ProofBucket",
+                                                    "Arn"
+                                                ]
+                                            },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "ProofUatBucketPolicy" : {
+            "Type" : "AWS::S3::BucketPolicy",
+            "DependsOn" : "ProofBucket",
+            "Condition" : "CreateUatResources",
+            "Properties" : {
+                "Bucket" : {
+                    "Ref" : "ProofBucket"
+                },
+                "PolicyDocument" : {
+                    "Id" : "ProofBucketUATPolicy",
+                    "Statement" : [
+                        {
+                            "Effect" : "Allow",
+                            "Principal" : {
+                                "AWS" : [
+                                    {
+                                        "Fn::Join" : [
+                                            "",
+                                            [
+                                                "arn:aws:iam::",
+                                                {
+                                                    "Ref" : "AWS::AccountId"
+                                                },
+                                                ":role/role-lambda-default"
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            },
+                            "Action"    : [
+                                "s3:*"
+                            ],
+                            "Resource"  : [
+                                {
+                                    "Fn::Join" : [
+                                        "",
+                                        [
+                                            {
+                                                "Fn::GetAtt" : [
+                                                    "ProofBucket",
+                                                    "Arn"
+                                                ]
+                                            },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "Effect" : "Allow",
+                            "Principal" : {
+                                "AWS" : "arn:aws:iam::020472808743:role/role-ec2-credit"
+                            },
+                            "Action"    : [
+                                "s3:*Object*"
+                            ],
+                            "Resource"  : [
+                                {
+                                    "Fn::Join" : [
+                                        "",
+                                        [
+                                            {
+                                                "Fn::GetAtt" : [
+                                                    "ProofBucket",
+                                                    "Arn"
+                                                ]
+                                            },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "Effect" : "Allow",
+                            "Principal" : {
+                                "AWS" : "arn:aws:iam::058037007628:role/role-Bryan-std-ec2"
+                            },
+                            "Action"    : [
+                                "s3:*Object*"
+                            ],
+                            "Resource"  : [
+                                {
+                                    "Fn::Join" : [
+                                        "",
+                                        [
+                                            {
+                                                "Fn::GetAtt" : [
+                                                    "ProofBucket",
+                                                    "Arn"
+                                                ]
+                                            },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "ProofProdBucketPolicy" : {
+            "Type" : "AWS::S3::BucketPolicy",
+            "DependsOn" : "ProofBucket",
+            "Condition" : "CreateProdResources",
+            "Properties" : {
+                "Bucket" : {
+                    "Ref" : "ProofBucket"
+                },
+                "PolicyDocument" : {
+                    "Id" : "ProofBucketPRODPolicy",
+                    "Statement" : [
+                        {
+                            "Effect" : "Allow",
+                            "Principal" : {
+                                "AWS" : [
+                                    {
+                                        "Fn::Join" : [
+                                            "",
+                                            [
+                                                "arn:aws:iam::",
+                                                {
+                                                    "Ref" : "AWS::AccountId"
+                                                },
+                                                ":role/role-lambda-default"
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            },
+                            "Action"    : [
+                                "s3:*"
+                            ],
+                            "Resource"  : [
+                                {
+                                    "Fn::Join" : [
+                                        "",
+                                        [
+                                            {
+                                                "Fn::GetAtt" : [
+                                                    "ProofBucket",
+                                                    "Arn"
+                                                ]
+                                            },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "MonitorLambdaPermission" : {
+            "Type" : "AWS::Lambda::Permission",
+            "Properties" : {
+                "Action" : "lambda:InvokeFunction",
+                "FunctionName" : "Bryan-Proof-Monitor-S3",
+                "Principal"    : "s3.amazonaws.com",
+                "SourceArn"    : {
+                    "Fn::Join" : [
+                        "",
+                        [
+                            "arn:aws:s3:::",
+                            {
+                                "Fn::FindInMap" : [
+                                    "Environment",
+                                    {
+                                        "Ref" : "Stage"
+                                    },
+                                    "Bucket"
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            }
+        },
+        "OperationS3LambdaPermission" : {
+            "Type" : "AWS::Lambda::Permission",
+            "Properties" : {
+                "Action" : "lambda:InvokeFunction",
+                "FunctionName" : "Bryan-Proof-Integrate-Operation-S3",
+                "Principal"    : "s3.amazonaws.com",
+                "SourceArn"    : {
+                    "Fn::Join" : [
+                        "",
+                        [
+                            "arn:aws:s3:::",
+                            {
+                                "Fn::FindInMap" : [
+                                    "Environment",
+                                    {
+                                        "Ref" : "Stage"
+                                    },
+                                    "Bucket"
+                                ]
+                            }
+                        ]
+                    ]
+                }
+            }
+        }
+    },
+    "Outputs"                  : {
+    }
+}

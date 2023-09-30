@@ -1,0 +1,500 @@
+[
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-automation",
+        "Id": "439f0538-e635-48eb-9fb6-df3e96bc41c4"
+      },
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "932db75d-8842-46aa-bfa1-5cfdf908f2f2",
+    "Code": "AT",
+    "LastUpdate": "2022-06-24T17:54:55.1203033Z",
+    "Active": true,
+    "Description": "AUTOMATION",
+    "ENDescription": "AUTOMATION",
+    "ESDescription": "AUTOMACION",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-business",
+        "Id": "626dde3f-1441-4181-9847-1ad278064a9b"
+      },
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "ba376383-980e-449d-880e-8527ee2bb171",
+    "Code": "BE",
+    "LastUpdate": "2022-06-24T17:54:55.1203033Z",
+    "Active": true,
+    "Description": "Bryan  EMPRESAS",
+    "ENDescription": "BUSINESS",
+    "ESDescription": "NEGOCIO",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-broker",
+        "Id": "e1ef953a-fd32-4a20-b584-cac2b72b3f6b"
+      },
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "1dac6fab-d933-4b10-b836-a641ad257c8f",
+    "Code": "BR",
+    "LastUpdate": "2022-04-05T21:27:21.5417939Z",
+    "Active": true,
+    "Description": "CORRETORA",
+    "ENDescription": "BROKER",
+    "ESDescription": "CORRETORA",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-baas",
+        "Id": "4c879caa-b95f-4ec3-afb8-af653d28de30"
+      },
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "aa7c1b85-4b5a-48f8-9a57-dcf1991bb01e",
+    "Code": "BS",
+    "LastUpdate": "2022-04-05T21:27:21.5417939Z",
+    "Active": true,
+    "Description": "BAAS",
+    "ENDescription": "BAAS",
+    "ESDescription": "BAAS",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "xyTJidX2ve6CtNh3rKtJ26Bawmbqm8E09rOVR0iD"
+      },
+      {
+        "Value": 3,
+        "Key": "VdQsTj5UmR5xSLHgpBRpUa8sxLt6odyn4yQGTov5"
+      },
+      {
+        "Value": 2,
+        "Key": "D0iPlZcWgk638nJMRYYhD7kXKbcqCS9W3mByuFcI"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-credit",
+        "Id": "eb3d82e3-dc85-477b-9557-79caa346f324"
+      },
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "ae34f455-b294-4128-83ed-b2de3d613530",
+    "Code": "CR",
+    "LastUpdate": "2022-04-14T18:10:19.1536709Z",
+    "Active": true,
+    "Description": "CRÉDITO",
+    "ENDescription": "CREDIT",
+    "ESDescription": "CREDITO",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "e1Ieyftwub2ekdEQo09m64uWYvE8pRXw9G60JUuG"
+      },
+      {
+        "Value": 3,
+        "Key": "ptugqXKFbf5PIp6AdYDMR1lEE7ooq1Oc3ApkYl2Y"
+      },
+      {
+        "Value": 2,
+        "Key": "Hd8ygM5vBp6wk2E7bJsyCaF70PtWE1ibT6ABQv4g"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-energy",
+        "Id": "539382ac-9c39-4242-919d-7753607af783"
+      }
+    ],
+    "Guid": "e19ccc72-7113-4a8e-9058-8657bb43289d",
+    "Code": "EN",
+    "LastUpdate": "2022-09-02T19:42:42.5268073Z",
+    "Active": true,
+    "Description": "ENERGIA",
+    "ENDescription": "ENERGY",
+    "ESDescription": "ENERGÍA",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-funds",
+        "Id": "4ce925a5-d3b6-4b25-a5bf-3c37bf0a19bf"
+      },
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "e14ae93b-3131-4f1c-9618-8777ada26079",
+    "Code": "FS",
+    "LastUpdate": "2022-10-26T14:25:00.1885834Z",
+    "Active": true,
+    "Description": "FUNDS",
+    "ENDescription": "FUNDS",
+    "ESDescription": "FUNDOS",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "6DUQeyXN7XaOmtvSnRACP6wEiyl0WAXg2qkopM9r"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "TuFNhkGWFn4i12hyhmCLJ733QJr5486B749eZaxq"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-fx",
+        "Id": "79e870d1-36fe-4eaa-8d55-7be737e5e619"
+      }
+    ],
+    "Guid": "fa45603e-1a98-46a6-ad55-26e7e7bc1a89",
+    "Code": "FX",
+    "LastUpdate": "2022-01-14T20:23:45.0694521Z",
+    "Active": true,
+    "Description": "CÂMBIO",
+    "ENDescription": "FOREIGN EXCHANGE",
+    "ESDescription": "CAMBIO",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "np1oU6jHsA8YV9pI1yYWbad2njfw2TqP4wSc10w7"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "mOyoCoXKz11sF9pOlRFu95smDdlCx53S3WNhHRCu"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-otc",
+        "Id": "465c2ad6-b20d-453f-94da-9438ae03f35c"
+      }
+    ],
+    "Guid": "fbff7afe-8883-4e4f-b673-c4ceab572e3c",
+    "Code": "MO",
+    "LastUpdate": "2022-01-14T20:23:37.7010763Z",
+    "Active": true,
+    "Description": "MIDDLE OTC",
+    "ENDescription": "MIDDLE OTC",
+    "ESDescription": "MIDDLE OTC",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "x1GFli5Uynav3lu9FoyGl7QB0VfnKK7BjK3ZxFJ3"
+      },
+      {
+        "Value": 2,
+        "Key": "9rBcSxBrpH8cw2bQfQjYQ6M1gQ2rsj575LBYJnzW"
+      },
+      {
+        "Value": 3,
+        "Key": "rM6hzVhCnG2p9UZKHbfLC8flWqSDq1or3ApIu9t7"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-mynt",
+        "Id": "10b1beea-ec30-4de7-bf76-2db1f196c222"
+      }
+    ],
+    "Guid": "8e3d8487-f88f-473e-94b2-7db78a6ecc07",
+    "Code": "MY",
+    "LastUpdate": "2022-01-14T20:23:31.9997871Z",
+    "Active": true,
+    "Description": "MYNT",
+    "ENDescription": "MYNT",
+    "ESDescription": "MYNT",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "3762c571-729c-43ce-883a-0a9bfb7fd97a",
+    "Code": "OB",
+    "LastUpdate": "2022-06-07T14:20:56.1801009Z",
+    "Active": true,
+    "Description": "ONBOARDING",
+    "ENDescription": "SONBOARDING",
+    "ESDescription": "ONBOARDING",
+    "User": "AGUIARGC"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 2,
+        "Key": "Hd8ygM5vBp6wk2E7bJsyCaF70PtWE1ibT6ABQv4g"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-partnership",
+        "Id": "f72411f8-7ded-4f01-bd8b-caf275d6334f"
+      }
+    ],
+    "Guid": "6d2a4511-c487-4a94-85dc-87331fcd3085",
+    "Code": "PS",
+    "LastUpdate": "2022-01-14T20:23:23.0086513Z",
+    "Active": true,
+    "Description": "PARTNERSHIP",
+    "ENDescription": "PARTNERSHIP",
+    "ESDescription": "PARTNERSHIP",
+    "User": "x.x@Bryan.com"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-ss",
+        "Id": "7d462690-b9ef-47b0-ab11-03ff4e8c71ee"
+      }
+    ],
+    "Guid": "b5101a85-746f-473f-85d5-a58db1cbe7dd",
+    "Code": "SS",
+    "LastUpdate": "2022-06-01T18:00:00.5417939Z",
+    "Active": true,
+    "Description": "SPECIAL SITUATION",
+    "ENDescription": "SPECIAL SITUATION",
+    "ESDescription": "SPECIAL SITUATION",
+    "User": "Proof"
+  },
+  {
+    "Group": "MarketType",
+    "ApiList": [
+      {
+        "Value": 1,
+        "Key": "M2tuthmje91ZIQeJsEbBq20ll2im4L8mLBvklg07"
+      },
+      {
+        "Value": 3,
+        "Key": "3gIg1WPvjiYmuBXISB7U9NH6InaEDcZ98zvNUR00"
+      },
+      {
+        "Value": 2,
+        "Key": "J5FOMBTcEoj6fnxBCRmf7AZme1YuFs63r0ePLHv0"
+      },
+      {
+        "Value": 5,
+        "Key": "Rl50LEOWNL56As5oslHmvlWAdNFqlGlamSwNEVjj"
+      }
+    ],
+    "RoleList": [
+      {
+        "Name": "Proof-role-wm",
+        "Id": "4e8e8e1f-83ff-4683-86ba-dd8cdb73e3bf"
+      },
+      {
+        "Name": "Proof-role-onboarding",
+        "Id": "daba8e8f-00f4-4943-8ca9-8914cf26f4f9"
+      }
+    ],
+    "Guid": "6e6d5917-c2cd-480b-84bf-83e9a3c1dabc",
+    "Code": "WM",
+    "LastUpdate": "2022-08-30T17:54:55.1203033Z",
+    "Active": true,
+    "Description": "WEALTH MANAGEMENT",
+    "ENDescription": "WEALTH MANAGEMENT",
+    "ESDescription": "WEALTH MANAGEMENT",
+    "User": "Proof"
+  }
+]

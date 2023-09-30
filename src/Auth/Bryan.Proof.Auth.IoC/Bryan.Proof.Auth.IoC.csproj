@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>annotations</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Refit" Version="6.3.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.HeaderPropagation" Version="6.0.8" />
+		<PackageReference Include="Polly" Version="7.2.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.MethodResult\Bryan.MethodResult.csproj" />
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.AspNet.Middlewares\Bryan.AspNet.Middlewares.csproj" />
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.DotNet.OpenTelemetry.Extensions\Bryan.DotNet.OpenTelemetry.Extensions.csproj" />
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.HttpClients.Extensions\Bryan.HttpClients.Extensions.csproj" />
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.Serilog\Bryan.Serilog.csproj" />
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.Swagger\Bryan.Swagger.csproj" />
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.MediatR.Extensions\Bryan.MediatR.Extensions.csproj" />
+		<ProjectReference Include="..\..\..\Bryan.Packages\Bryan.TokenAuth\Bryan.TokenAuth.csproj" />
+		<ProjectReference Include="..\Bryan.Proof.Auth.Api.Client\Bryan.Proof.Auth.Api.Client.csproj" />
+	</ItemGroup>
+</Project>
